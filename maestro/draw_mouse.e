@@ -4,9 +4,9 @@
 // Post: click_(1,2,3)(x,y) are all set to the coordinates where a click first happened with each of the buttons (however only left button is used in the program)
 // Post: mouse_(x,y) are set to the value of the x and y coordinates
 
-draw_mouse	add	rand1-16	rand1-16	num1	// For random numbers
-		bne	skip_rand	rand1-16	num17
-		cp	rand1-16	num1
+draw_mouse	add	rand0-15	rand0-15	num1	// For random numbers
+		bne	skip_rand	rand0-15	num16
+		cp	rand0-15	num0
 skip_rand	add	rand0-6		rand0-6		num1
 		bne	skip_rand2	rand0-6		num7
 		cp	rand0-6		num0
@@ -31,15 +31,15 @@ no_recolor	call	save_color	re_color_ret
 skip_no_re	cp	just_drawn	num0
 		add	vga_x1		mouse_x		num0
 		add	vga_y1		mouse_y		num0
-		add	vga_x2		mouse_x		num3
-		add	vga_y2		mouse_y		num3
+		add	vga_x2		mouse_x		num4
+		add	vga_y2		mouse_y		num4
 		cp	vga_color	RED
 		call	vga_driver	vga_return
 		add	vga_x1		mouse_x		num1
 		add	vga_y1		mouse_y		num1
-		add	vga_x2		mouse_x		num2
-		add	vga_y2		mouse_y		num2
-		cp	vga_color	GREEN
+		add	vga_x2		mouse_x		num3
+		add	vga_y2		mouse_y		num3
+		cp	vga_color	BLUE
 		call	vga_driver	vga_return
 		//sl	mouse_b1	mouse_b1	num2		// for displaying button clicks on LED
 		//sl	mouse_b2	mouse_b2	num1
@@ -84,7 +84,7 @@ great_x		cp	mouse_x		num638
 great_y		cp	mouse_y		num478
 		be	skip4		0		0
 		
-re_color	mult	re_y_temp	re_y_curr	num4		// draw over old mouse
+re_color	mult	re_y_temp	re_y_curr	num5		// draw over old mouse
 		add	mouse_i		re_x_curr	re_y_temp
 		add	vga_x1		re_x_curr	x_old
 		add	vga_y1		re_y_curr	y_old
@@ -93,14 +93,14 @@ re_color	mult	re_y_temp	re_y_curr	num4		// draw over old mouse
 		cpfa	vga_color	mouse_old	mouse_i
 		call	vga_driver	vga_return
 		add	re_x_curr	re_x_curr	num1
-		bne	re_color	re_x_curr	num4
+		bne	re_color	re_x_curr	num5
 		cp	re_x_curr	num0
 		add	re_y_curr	re_y_curr	num1
-		bne	re_color	re_y_curr	num4
+		bne	re_color	re_y_curr	num5
 		cp	re_y_start	num0
 		cp	re_x_curr	num0
 		cp	re_y_curr	num0
-save_color	mult	re_y_temp	re_y_curr	num4		// save pixels at soon-to-be location of mouse
+save_color	mult	re_y_temp	re_y_curr	num5		// save pixels at soon-to-be location of mouse
 		add	mouse_i		re_x_curr	re_y_temp
 		add	vga_x1		re_x_curr	mouse_x
 		add	vga_y1		re_y_curr	mouse_y
@@ -110,10 +110,10 @@ save_color	mult	re_y_temp	re_y_curr	num4		// save pixels at soon-to-be location 
 		call	vga_driver	vga_return
 		cpta	vga_color_read	mouse_old	mouse_i
 		add	re_x_curr	re_x_curr	num1
-		bne	save_color	re_x_curr	num4
+		bne	save_color	re_x_curr	num5
 		cp	re_x_curr	num0
 		add	re_y_curr	re_y_curr	num1
-		bne	save_color	re_y_curr	num4
+		bne	save_color	re_y_curr	num5
 		cp	re_y_start	num0
 		cp	re_x_curr	num0
 		cp	re_y_curr	num0
@@ -135,7 +135,16 @@ re_y_temp	.data	0
 mouse_i		.data	0
 x_old		.data	0
 y_old		.data	0
-mouse_old	.data	209	// 4 x 4 array of last mouse colors
+mouse_old	.data	209	// 5 x 5 array of last mouse colors
+		.data	209
+		.data	209
+		.data	209
+		.data	209
+		.data	209
+		.data	209
+		.data	209
+		.data	209
+		.data	209
 		.data	209
 		.data	209
 		.data	209

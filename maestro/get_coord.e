@@ -64,10 +64,14 @@ below		blt	end		num465		click_1y	// buttons
 		blt	call_undo	num390		click_1x
 		blt	call_mm		click_1x	num250
 		be	end		0		0
-call_undo	//be	call_mm		p_checkmate	num1		// don't allow undo if the game is over (commented out purposely)
+call_undo	be	call_mm		p_checkmate	num1		// don't allow undo if the game is over
+		be	cu_rr		mode		MODE_PUZZ
+		be	cu_u2		mode		MODE_TWO
+		be	cu_rr		turn		TURN_BLACK	// can't undo AI moves
+cu_u2		cp	dont_just_drawn	num1				// flag for mouse
 		call	undo_move	undo_move_ret
+cu_rr		ret	get_coord_ret
 		//ret	player_move_ret
-		ret	get_coord_ret
 call_mm		be	one_ret		mode		MODE_ONE	// return using the correct address
 		be	two_ret		mode		MODE_TWO
 		be	puzz_ret	mode		MODE_PUZZ
@@ -96,3 +100,4 @@ COL8_x		.data	520
 board_left	.data	120
 board_top	.data	5
 get_coord_ret	.data	0
+dont_just_drawn	.data	0

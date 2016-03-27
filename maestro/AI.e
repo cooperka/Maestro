@@ -31,14 +31,15 @@ move_random	cp	mr_i		num0
 		cp	AI_piece_count	num0
 
 mr_loop		cpfa 	piece_type	board		mr_i // counts off AI pieces until a random number is reached
-		be	mr_skip	piece_type		num0
-		call	color_check	color_check_ret	
-		bne	mr_skip	piece_col turn
+		be	mr_skip		piece_type	num0
+		call	color_check	color_check_ret
+		bne	mr_skip		piece_col 	turn
 		add	AI_piece_count	num1		AI_piece_count
+		be	find_valid_loop	AI_piece_count	rand0-15
 mr_skip		add	mr_i		mr_i		num1
-		bne	check_piece_count mr_i		num64
+		bne	mr_cont		mr_i		num64
 		cp	mr_i		num0	
-check_piece_count bne	mr_loop		AI_piece_count	rand1-16
+mr_cont		be	mr_loop		0		0
 
 find_valid_loop cp	AI_move_from	mr_i		//makes sure the selected piece has a valid move
 		cp	convert_from	mr_i
@@ -46,23 +47,23 @@ find_valid_loop cp	AI_move_from	mr_i		//makes sure the selected piece has a vali
 		call	get_moves	get_moves_ret
 		call	check_for_move	check_for_move_ret
 		be	piece_ok	valid_found	num1
-		add	mr_i		mr_i		num1
-		cpfa 	piece_type	board		mr_i
-		be	find_valid_loop	0		0
+		add	mr_i		mr_i		num2	// add 2 so it doesn't keep checking the same piece if there are a small number of pieces left
+		blt	mr_cont2	mr_i		num64
+		cp	mr_i		num0	
+mr_cont2	be	mr_loop		0		0
 	
-piece_ok	cp	AI_move_from	mr_i
-		cp	mr_i		num0
+piece_ok	cp	mr_i		num0
 mr_loop2	cpfa	temp		moves_board	mr_i // counts valid moves until a random number is reached
 		bne	mr_skip2	temp		num1
 		add	AI_move_count	AI_move_count	num1
-mr_skip2	be	mr_end		AI_move_count	rand0-6
+mr_skip2	be	mr_end		AI_move_count	rand0-15
 		add	mr_i		mr_i		num1
 		bne	mr_loop2	mr_i		num64
 		cp	mr_i		num0
 		be	mr_loop2	0		0
 		
-mr_end		cp	AI_move_to	mr_i	
-		ret	move_random_ret		
+mr_end		cp	AI_move_to	mr_i
+		ret	move_random_ret
 //------------------------------------------------------------------------------------------	
 find_kill 	cp	fk_i		num0	// finds an opposing piece which can be captured
 		cp	move_found	num0	

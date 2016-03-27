@@ -3,7 +3,7 @@
 
 check		blt	next_piece	check_i		num64
 check_loop2	cpfa	check_current	moves_board	king_loc
-		be	check	check_current	num0
+		be	check		check_current	num0
 		be	check_yes	0		0
 next_piece	cpfa	piece_type	board		check_b_i
 		call	convert_num	conv_num_ret
@@ -20,25 +20,30 @@ check_end2	cp	check_i		num0
 		cp	check_b_i	num0
 		cp	check_current	num0
 		ret	check_ret
-		
-find_king	cpfa	temp		board		find_i
+//---------------------------------------------------------------------------	
+find_king	cp	find_i		num0
+king_loop	cpfa	temp		board		find_i
 		be	king_white	temp		num11
 		be	king_black	temp		num12
 		add	find_i		find_i		num1
-		blt	find_king	find_i		num64
+		bne	king_loop	find_i		num64
 		be	fk_ERROR	0		0
+		
 king_white	be	king_found	turn		TURN_WHITE
 		add	find_i		find_i		num1
-		be	find_king	0		0
+		be	king_loop	0		0
 king_black	be	king_found	turn		TURN_BLACK
 		add	find_i		find_i		num1
-		be	find_king	0		0
-king_found	cp	king_loc	find_i
-		cp	find_i		num0
-		ret	find_king_ret
+		be	king_loop	0		0
 		
-fk_ERROR	out	1		31				// There are no kings on board
+king_found	cp	king_loc	find_i
+		ret	find_king_ret
 
+fk_ERROR	//out	1		num7				// There are no kings on board??
+		//call	delay		delay_ret
+		//out	1		num0
+		ret	find_king_ret
+//---------------------------------------------------------------------------
 convert_num	div	temp		check_b_i	num8
 		add	row		temp		num1
 		mult	temp1		temp		num8
@@ -50,7 +55,7 @@ conv_sub	sub	temp		temp		num1
 conv_end	cp	column		conv_i
 		cp	conv_i		num0
 		ret	conv_num_ret
-
+//---------------------------------------------------------------------------
 blank!		cpta	num0		moves_board	blank_i		// get_moves does not work for blank squares, so fill moves_board with 0
 		add	blank_i		blank_i		num1
 		blt	blank!		blank_i		num64

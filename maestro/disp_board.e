@@ -1,14 +1,14 @@
 // redraws the entire board based on the 'board' array
 // for each square, calls draw_piece after setting sdram_(x,y), dp_(x,y)0, and filling 'piece' array
 
-disp_board	sub	vga_x1		board_col	num5	// black border
+disp_board	cp	step		num1
+		sub	vga_x1		board_col	num5	// black border
 		sub	vga_y1		board_row	num5
 		cp	vga_x2		num524
 		cp	vga_y2		num409
 		cp	vga_color	num0
 		call	vga_driver	vga_return
-		call	button_draw	bd_ret			// main menu and undo buttons
-		call	rev_col		rev_col_ret
+		//call	button_draw	bd_ret			// main menu and undo buttons, moved to _test.e functions
 b_draw		call	rev_col		rev_col_ret
 		add	b_i		b_i		num1
 		cpfa	square		board		b_i
@@ -38,7 +38,9 @@ b_end		bne	no_end		board_col	num520
 		cp	board_row	b_row_init
 		cp	board_col	b_col_init
 		cp	b_i		num-1
+		be	skip_jd		dont_just_drawn	num1		// from get_coord.e
 		cp	just_drawn	num1
+skip_jd		cp	dont_just_drawn	num0
 		ret	disp_board_ret
 		
 rev_col		bne	light		vga_color	COLOR_L		// Reverse colors

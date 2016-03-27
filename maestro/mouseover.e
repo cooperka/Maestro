@@ -47,7 +47,10 @@ mo_main		be	mo_end2		border_drawn	num1
 		cp	mo_y2		num471
 		be	mo_draw_color	0		0
 mo_undo		be	mo_end2		border_drawn	num1
-		cp	mo_x1		num390
+		be	mo_end2		mode		MODE_PUZZ
+		be	mo_u2		mode		MODE_TWO
+		be	mo_end2		turn		TURN_BLACK
+mo_u2		cp	mo_x1		num390
 		cp	mo_y1		num420
 		cp	mo_x2		num471
 		cp	mo_y2		num471

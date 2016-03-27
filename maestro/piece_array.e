@@ -14,5 +14,6 @@ sdr_r_skip	call	sdram_read	sdram_r_ret
 		be	piece_array	0		0
 sdr_r_rr	cp	sdr_r_i		num0
 		ret	pa_ret
+		
 sdr_r_i		.data	0
 pa_ret		.data	0

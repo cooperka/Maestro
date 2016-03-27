@@ -101,7 +101,7 @@ num2020		.data	2020
 temp		.data	0	// various uses
 temp1		.data	0
 
-rand1-16	.data	0	// random number in range [1,16] for AI
+rand0-15	.data	0	// random number in range [0,15] for AI random moves
 rand0-6		.data	0	// random number in range [0,6] for puzzles
 
 turn		.data	1	// Whose turn it is

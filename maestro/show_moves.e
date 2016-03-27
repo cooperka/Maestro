@@ -15,6 +15,7 @@ sm_end		bne	sm_no_end	sm_col		num520
 		cp	sm_col		sm_col_init
 		cp	show_move_i	num-1
 		ret	show_moves_ret
+		
 draw_color	add	vga_x1		sm_col		num0
 		add	vga_y1		sm_row		num0
 		add	vga_x2		sm_col		num49

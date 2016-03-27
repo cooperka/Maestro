@@ -11,8 +11,9 @@ puzzle_mode	add	vga_x1		num0		num0
 		
 		//cp	rand0-6		num0		// for testing only
 		cp	puzzle_num	rand0-6		// rand0-6 is a random number created in draw_mouse.e
-		call	copy_puzzle	copy_puzzle_ret
 		
+		call	copy_puzzle	copy_puzzle_ret
+		call	button_draw	bd_ret
 		call	disp_board	disp_board_ret
 //------------------------------------------------------------------------------------------			
 puzzle_start	be	do_player	turn		TURN_WHITE
@@ -25,6 +26,7 @@ do_player	call	player_move	player_move_ret
 puzzle_go_undo	call	delay		delay_ret
 		call	delay		delay_ret
 		call	undo_move	undo_move_ret
+		call	switch_turn	switch_turn_ret
 		call	disp_board	disp_board_ret
 		be	puzzle_start	0		0
 do_puzzle	add	p_index_global	p_index_global	num64

@@ -16,11 +16,13 @@ select_piece	cpfa	piece_type		board			gi_index
 		cp	step			num2
 		cp	selected_i		gi_index
 sp_end		ret	make_move_ret
+
 move_piece	cpfa	temp			moves_board		gi_index
 		be	comp_move		temp			num1
 		call	disp_board		disp_board_ret
 		cp	step			num1
 		ret	make_move_ret
+		
 comp_move	call	shift_boards		shift_boards_ret
 		cpfa 	temp			board			gi_index
 		be	skip_capt		temp			num0
@@ -51,6 +53,7 @@ shift_boards_loop cpfa	temp			board			undo_i
 		add	undo_i			num1			undo_i
 		bne	shift_boards_loop	num64			undo_i
 		ret	shift_boards_ret
+		
 check_color	be	black_moving		turn			TURN_BLACK		// attacking enemy pieces OK, attacking your own piece not legal
 		be	move_ok			piece_type		PIECE_W_PAWN
 		be	move_ok			piece_type		PIECE_W_ROOK

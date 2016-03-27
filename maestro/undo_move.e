@@ -26,10 +26,9 @@ undo_move_loop		cpfa	temp			board_undo		undo_i
 			be	uc			in_check		num0
 			call	switch_turn		switch_turn_ret
 uc			call	undo_capture		undo_capture_ret			// required for bug fixing
-			be	undo_move_end		in_check		num0
+undo_move_end		be	no_switch		mode			MODE_ONE
 			call	switch_turn		switch_turn_ret
-undo_move_end		call	switch_turn		switch_turn_ret
-			call	disp_board		disp_board_ret				// refresh the board to show the undone move
+no_switch		call	disp_board		disp_board_ret				// refresh the board to show the undone move
 			ret	undo_move_ret
 
 undo_move_ret		.data	0
