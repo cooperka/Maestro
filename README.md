@@ -2,6 +2,8 @@
 
 A full GUI for chess, written entirely in assembly. Chosen as a final project during ENGR 100 with Peter Chen, Freshman year of college (2011).
 
+![Screenshot of single-player AI mode](/screenshots/ai-mode-2.png "Screenshot of single-player AI mode")
+
 ## Usage
 
 Windows only. Linux version of ase100 is available online, but the newer emulator seems to use a slightly modified language from the one used in this lab in 2011.
