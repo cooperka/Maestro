@@ -1,6 +1,6 @@
 # Maestro
 
-A full GUI for chess, written entirely in assembly. Chosen as a final project during ENGR 100 with Peter Chen, Freshman year of college (2011).
+A full GUI for chess, written entirely in assembly. Allows for both multiplayer and single-player modes, using moderate AI. Chosen as a final project during ENGR 100, Freshman year of college (2011).
 
 ![Screenshot of single-player AI mode](/screenshots/ai-mode-2.png "Screenshot of single-player AI mode")
 
@@ -16,9 +16,11 @@ Windows only. Linux version of ase100 is available online, but the newer emulato
 
 ## History
 
-My father is the girls' cross country coach at Grosse Pointe North high school, and he puts together slideshows at the end of every season for the entire sports department. This involves collecting thousands of photos from parents and photographers across hundreds of sports events. He then sorts through those photos and chooses the best ones to put into a slideshow. In order to make this task easier and to make the final presentation an acceptable file size, most photos must be downsized significantly.
+ENGR 100 (Microprocessors and Toys with Peter Chen) was one of my favorite courses in college. It was heavily lab- and project-based, and for the final project we had the full autonomy to design anything we wanted to -- as long as it was some sort of "toy" and was built using the Altera DE2 boards in the lab (with E100 processors). Teams came up with projects ranging from Guitar Hero to automated nerf gun launchers.
 
-I wrote this utility so he could downsize the photos efficiently, instead of using Photoshop's batch utility which is much slower and harder to use.
+My team of four, led by myself and Neil Matthews, decided to make a chess GUI (and to meet the "toy" criteria, we proposed shipping it as a tablet-sized device). We started by implementing a simple human vs. human mode, but continued adding more and more features, eventually ending up with a moderate artificially intelligent single-player mode and a suite of challenge modes where the board is given a particular initial setup and you continue from there.
+
+Our demo went wonderfully, and we were very happy with the final product. You can find our presentation slides [here](/Maestro%20Presentation.pdf).
 
 *Note:
 All the code here is in its (mostly) original form, and hasn't been modified since I wrote it in college.*
